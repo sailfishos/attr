@@ -1,0 +1,24 @@
+* Thu Jun 02 2011 Anas Nashif <anas.nashif@intel.com> - 2.4.46
+- Update to 2.4.46
+
+* Thu Jun 02 2011 Auke Kok <auke-jan.h.kok@intel.com> - 2.4.43  
+- exclude la/a files explicitly.  
+
+* Mon May 23 2011 Anas Nashif <anas.nashif@intel.com> - 2.4.43
+- Split translations and docuemntation
+
+* Sat Nov 14 2009 Anas Nashif <anas.nashif@intel.com> - 2.4.43
+- Fixed memory leaks 
+- Remove symbolic link from %post
+
+* Wed Jul 1 2009 Austin Zhang <austin.zhang@intel.com> 2.4.43
+- Add symbolic link for libtool works well.
+
+* Fri Feb 27 2009 Anas Nashif <anas.nashif@intel.com> 2.4.43
+- Fixed PreReq on ldconfig
+
+* Tue Jan 13 2009 Anas Nashif <anas.nashif@intel.com> 2.4.43
+- Update to 2.4.43
+
+* Fri Dec 05 2008 Arjan van de Ven <arjan@linux.intel.com> 2.4.41
+- Use parallel build

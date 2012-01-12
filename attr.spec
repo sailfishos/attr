@@ -72,7 +72,7 @@ you'll also want to install attr.
 
 %build
 # attr abuses libexecdir
-%configure --libdir=/%{_lib} --libexecdir=%{_libdir} --disable-gettext
+%configure --libdir=/%{_lib} --libexecdir=%{_libdir}
 make %{?_smp_mflags}  LIBTOOL="libtool --tag=CC"
 
 %install
@@ -90,7 +90,12 @@ rm -f %{buildroot}%{_libdir}/libattr.la
 rm -f %{buildroot}/%{_libdir}/libattr.so
 ln -sf ../../%{_lib}/libattr.so %{buildroot}/%{_libdir}/libattr.so
 chmod 0755 %{buildroot}/%{_lib}/libattr.so.*.*.*
+
+%find_lang %{name}
+
 rm -rf %{buildroot}%{_docdir}
+
+
 
 %clean
 rm -rf %{buildroot}
@@ -101,6 +106,8 @@ rm -rf %{buildroot}
 %post -n libattr -p /sbin/ldconfig
 
 %postun -n libattr -p /sbin/ldconfig
+
+%lang_package
 
 %files
 %defattr(-,root,root,-)

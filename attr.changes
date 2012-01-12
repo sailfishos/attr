@@ -1,3 +1,7 @@
+* Thu Jan 12 2012 Carsten Munk <carsten.munk@gmail.com> - 2.4.46
+- Re-enable gettext and make -locale package, get rid of awkward
+  errors in build log.
+
 * Thu Jun 02 2011 Anas Nashif <anas.nashif@intel.com> - 2.4.46
 - Update to 2.4.46
 

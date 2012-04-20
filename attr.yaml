@@ -1,0 +1,67 @@
+Name: attr
+Summary: Utilities for managing filesystem extended attributes
+Version: 2.4.46
+Release: 1
+Group: System/Base
+License: GPLv2+
+URL: http://savannah.nongnu.org/projects/attr
+Sources:
+    - http://download.savannah.gnu.org/releases/attr/attr-%{version}.src.tar.gz
+Patches:
+    # make it ready for rpmbuild
+    - attr-2.4.32-build.patch
+    # silence compile-time warnings
+    - attr-2.4.44-warnings.patch
+    # getfattr: return non-zero exit code on failure (#660619)
+    - attr-2.4.44-bz660619.patch
+    # walk_tree: do not follow symlink to directory with -h (#660613)
+    - attr-2.4.44-bz660613.patch
+    # fix typos in attr(1) man page (#669095)
+    - attr-2.4.44-bz669095.patch
+Description: |
+    A set of tools for manipulating extended attributes on filesystem
+    objects, in particular getfattr(1) and setfattr(1).
+    An attr(1) command is also provided which is largely compatible
+    with the SGI IRIX tool of the same name.
+
+PkgBR:
+    - gettext
+    - libtool >= 1.5
+Configure: configure
+ConfigOptions:
+    - --libdir=/%{_lib}
+    - --libexecdir=%{_libdir}
+SetupOptions: -q -n %{name}-%{version}
+Builder: none
+SubPackages:
+    - Name: libattr-devel
+      AsWholeName: yes
+      Summary: Extended attribute static libraries and headers
+      Group: Development/Libraries
+      License: LGPLv2+
+      Description: |
+          This package contains the libraries and header files needed to
+          develop programs which make use of extended attributes.
+          For Linux programs, the documented system call API is the
+          recommended interface, but an SGI IRIX compatibility interface
+          is also provided.
+          
+          Currently only ext2, ext3 and XFS support extended attributes.
+          The SGI IRIX compatibility API built above the Linux system calls is
+          used by programs such as xfsdump(8), xfsrestore(8) and xfs_fsr(8).
+          
+          You should install libattr-devel if you want to develop programs
+          which make use of extended attributes.  If you install libattr-devel,
+          you'll also want to install attr.
+      Requires:
+          - libattr = %{version}
+
+    - Name: libattr
+      AsWholeName: yes
+      Summary: Dynamic library for extended attribute support
+      Group: System/Libraries
+      License: LGPLv2+
+      Description: |
+          This package contains the libattr.so dynamic library which contains
+          the extended attribute system calls and library functions.
+

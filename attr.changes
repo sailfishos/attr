@@ -1,3 +1,7 @@
+* Fri Apr 20 2012 Marko Saukko <sage@merproject.org> - 2.4.46
+- Fixes MER#250: attr spec file has obsolete URL entry
+- Added .yaml for spectacle
+
 * Thu Jan 12 2012 Carsten Munk <carsten.munk@gmail.com> - 2.4.46
 - Re-enable gettext and make -locale package, get rid of awkward
   errors in build log.

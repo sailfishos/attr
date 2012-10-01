@@ -29,7 +29,6 @@ PkgBR:
     - libtool >= 1.5
 Configure: configure
 ConfigOptions:
-    - --libdir=/%{_lib}
     - --libexecdir=%{_libdir}
 SetupOptions: -q -n %{name}-%{version}
 Builder: none

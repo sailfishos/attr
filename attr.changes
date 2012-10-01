@@ -1,3 +1,6 @@
+* Mon Oct 01 2012 Marko Saukko <marko.saukko@jollamobile.com> - 2.4.46
+- Contributing to MER#174 moving libs to /usr
+
 * Fri Apr 20 2012 Marko Saukko <sage@merproject.org> - 2.4.46
 - Fixes MER#250: attr spec file has obsolete URL entry
 - Added .yaml for spectacle

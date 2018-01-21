@@ -1,0 +1,3 @@
+[submodule "attr"]
+	path = attr
+	url = git://git.savannah.gnu.org/attr.git

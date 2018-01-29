@@ -5,7 +5,7 @@ Release:    1
 Group:      System/Base
 License:    GPLv2+
 URL:        http://savannah.nongnu.org/projects/attr
-Source0:    attr-%{version}.src.tar.gz
+Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  gettext
 BuildRequires:  libtool >= 1.5
 Requires:   libattr = %{version}-%{release}

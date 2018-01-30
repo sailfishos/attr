@@ -1,6 +1,9 @@
 Name:       attr
 Summary:    Utilities for managing filesystem extended attributes
-Version:    2.4.48
+# Currently not updated to version 2.4.48 as acl upstream has not 
+# released version that is build compatible with attr 2.4.48.
+# After that is there we can update this further.
+Version:    2.4.47
 Release:    1
 Group:      System/Base
 License:    GPLv2+
@@ -38,7 +41,6 @@ You should install libattr-devel if you want to develop programs
 which make use of extended attributes.  If you install libattr-devel,
 you'll also want to install attr.
 
-
 %package -n libattr
 Summary:    Dynamic library for extended attribute support
 License:    LGPLv2+
@@ -54,7 +56,8 @@ the extended attribute system calls and library functions.
 %setup -q -n %{name}-%{version}/%{name}
 
 %build
-./autogen.sh
+make distclean
+make configure
 %configure --disable-static \
     --libexecdir=%{_libdir}
 
@@ -64,10 +67,11 @@ make %{?_smp_mflags}  LIBTOOL="libtool --tag=CC"
 %install
 rm -rf %{buildroot}
 
-make install DESTDIR=%{buildroot}
+make install-dev DESTDIR=%{buildroot}
+make install-lib DESTDIR=%{buildroot}
 
 # get rid of libattr.a and libattr.la
-rm %{buildroot}%{_libdir}/libattr.{a,la}
+rm -f %{buildroot}%{_libdir}/libattr.{a,la}
 
 # fix permissions
 chmod 0755 %{buildroot}/%{_libdir}/libattr.so.*.*.*
@@ -93,10 +97,8 @@ rm -rf %{buildroot}%{_docdir}
 %defattr(-,root,root,-)
 %{_libdir}/libattr.so
 %{_includedir}/attr/*
-%{_libdir}/pkgconfig/libattr.pc
 
 %files -n libattr
 %defattr(-,root,root,-)
 %doc doc/COPYING.LGPL
 %{_libdir}/libattr.so.*
-%config %{_sysconfdir}/xattr.conf

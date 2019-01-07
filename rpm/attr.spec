@@ -19,6 +19,15 @@ objects, in particular getfattr(1) and setfattr(1).
 An attr(1) command is also provided which is largely compatible
 with the SGI IRIX tool of the same name.
 
+%package doc
+Summary:   Documentation for %{name}
+Group:     Documentation
+Requires:  %{name} = %{version}-%{release}
+Obsoletes: %{name}-docs
+
+%description doc
+Man pages for %{name}.
+
 %package -n libattr-devel
 Summary:    Extended attribute static libraries and headers
 License:    LGPLv2+
@@ -61,7 +70,6 @@ make configure
 %configure --disable-static \
     --libexecdir=%{_libdir}
 
-
 make %{?_smp_mflags}  LIBTOOL="libtool --tag=CC"
 
 %install
@@ -76,10 +84,11 @@ rm -f %{buildroot}%{_libdir}/libattr.{a,la}
 # fix permissions
 chmod 0755 %{buildroot}/%{_libdir}/libattr.so.*.*.*
 
-rm -rf %{buildroot}%{_docdir}
+rm -f %{buildroot}%{_docdir}/%{name}/COPYING*
+rm -f %{buildroot}%{_docdir}/%{name}/PORTING
+mv %{buildroot}%{_docdir}/%{name} %{buildroot}%{_docdir}/%{name}-%{version}
 
 %find_lang %{name}
-%docs_package
 %lang_package
 
 %post -n libattr -p /sbin/ldconfig
@@ -88,7 +97,7 @@ rm -rf %{buildroot}%{_docdir}
 
 %files
 %defattr(-,root,root,-)
-%doc doc/COPYING
+%license doc/COPYING
 %{_bindir}/attr
 %{_bindir}/getfattr
 %{_bindir}/setfattr
@@ -100,5 +109,10 @@ rm -rf %{buildroot}%{_docdir}
 
 %files -n libattr
 %defattr(-,root,root,-)
-%doc doc/COPYING.LGPL
+%license doc/COPYING.LGPL
 %{_libdir}/libattr.so.*
+
+%files doc
+%defattr(-,root,root,-)
+%{_mandir}/man*/*%{name}*.*
+%{_docdir}/%{name}-%{version}

@@ -7,7 +7,7 @@ Version:    2.4.47
 Release:    1
 Group:      System/Base
 License:    GPLv2+
-URL:        http://savannah.nongnu.org/projects/attr
+URL:        https://github.com/sailfishos/attr
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  gettext
 BuildRequires:  libtool >= 1.5

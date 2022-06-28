@@ -5,9 +5,8 @@ Summary:    Utilities for managing filesystem extended attributes
 # After that is there we can update this further.
 Version:    2.4.47
 Release:    1
-Group:      System/Base
 License:    GPLv2+
-URL:        http://savannah.nongnu.org/projects/attr
+URL:        https://github.com/sailfishos/attr
 Source0:    %{name}-%{version}.tar.bz2
 BuildRequires:  gettext
 BuildRequires:  libtool >= 1.5
@@ -21,7 +20,6 @@ with the SGI IRIX tool of the same name.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 Obsoletes: %{name}-docs
 
@@ -31,7 +29,6 @@ Man pages for %{name}.
 %package -n libattr-devel
 Summary:    Extended attribute static libraries and headers
 License:    LGPLv2+
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   libattr = %{version}
 
@@ -53,7 +50,6 @@ you'll also want to install attr.
 %package -n libattr
 Summary:    Dynamic library for extended attribute support
 License:    LGPLv2+
-Group:      System/Libraries
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 

@@ -1,13 +1,11 @@
 Name:       attr
 Summary:    Utilities for managing filesystem extended attributes
-# Currently not updated to version 2.4.48 as acl upstream has not 
-# released version that is build compatible with attr 2.4.48.
-# After that is there we can update this further.
-Version:    2.4.47
+Version:    2.5.1
 Release:    1
 License:    GPLv2+
 URL:        https://github.com/sailfishos/attr
 Source0:    %{name}-%{version}.tar.bz2
+Patch0:     0003-attr-2.4.48-xattr-conf-nfs4-acls.patch
 BuildRequires:  gettext
 BuildRequires:  libtool >= 1.5
 Requires:   libattr = %{version}-%{release}
@@ -58,27 +56,19 @@ This package contains the libattr.so dynamic library which contains
 the extended attribute system calls and library functions.
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
+%autosetup -n %{name}-%{version}/%{name}
 
 %build
-make distclean
-make configure
-%configure --disable-static \
-    --libexecdir=%{_libdir}
+./autogen.sh
+%configure --disable-static
 
-make %{?_smp_mflags}  LIBTOOL="libtool --tag=CC"
+%make_build
 
 %install
-rm -rf %{buildroot}
-
-make install-dev DESTDIR=%{buildroot}
-make install-lib DESTDIR=%{buildroot}
+%make_install
 
 # get rid of libattr.a and libattr.la
 rm -f %{buildroot}%{_libdir}/libattr.{a,la}
-
-# fix permissions
-chmod 0755 %{buildroot}/%{_libdir}/libattr.so.*.*.*
 
 rm -f %{buildroot}%{_docdir}/%{name}/COPYING*
 rm -f %{buildroot}%{_docdir}/%{name}/PORTING
@@ -101,12 +91,14 @@ mv %{buildroot}%{_docdir}/%{name} %{buildroot}%{_docdir}/%{name}-%{version}
 %files -n libattr-devel
 %defattr(-,root,root,-)
 %{_libdir}/libattr.so
+%{_libdir}/pkgconfig/*.pc
 %{_includedir}/attr/*
 
 %files -n libattr
 %defattr(-,root,root,-)
 %license doc/COPYING.LGPL
 %{_libdir}/libattr.so.*
+%config(noreplace) %{_sysconfdir}/xattr.conf
 
 %files doc
 %defattr(-,root,root,-)
